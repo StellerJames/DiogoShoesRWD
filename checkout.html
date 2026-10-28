@@ -4,69 +4,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout</title>
-    <link href="styles.css" rel="stylesheet" />
+    <meta name="description" content="Review your cart and complete your Diogo Shoes order.">
+    <title>Checkout | Diogo Shoes</title>
+    <link rel="icon" href="images/logo.png">
+    <link rel="stylesheet" href="styles.css">
+    <script src="js/products.js" defer></script>
+    <script src="js/cart.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/checkout.js" defer></script>
 </head>
 
 <body>
-    <div class = "grid-container">
-        <div class = "header">
-    <header>
-        <div class="navigation">
-        <ul>
-            <li><img src="images/logo.png" alt="Diogo Logo" width=100%></li>
-            <li><a href=index.html>Home</a> </li>
-            <li><a href=aboutus.html>About Us</a></li>
-            <li><a href=learnmore.html>Learn More</a></li>
-            <li><a href=products.html>Products</a></li>
-            <li><a href=checkout.html>Checkout</a></li>
-            <li><a href=confirmation.html>Confirmation</a></li>
-        </ul> 
-          
-    </div>
-    </header>
-</div>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-    <main>
-        <div class = "content">
-        <h1 class="checkout"> Check Out</h1>
-        <img src="images/peach-oxfords.jpg" alt="Peach Oxford Shoes" width="200">
-        <div class="checkout">Peach Oxfords $219.00
-            Shipping $9.00</div>
-        <hr>
-        Total $228.00
-     
-        <ul>
-            <section id="form elements">
-                <form>
-                    <input type="letters" id="email" placeholder="Email"><br>
-                    <input type="numbers" id="card" placeholder="Card Information"><br>
-                    <input type="month" id="expiration date" placeholder="MM/YY"><br>
-                    <input type="numbers" id="cvc" placeholder="CVC" class=cvc>
-                
-                    <input type="button" value="Purchase">
-                    
-                </form>
-            </section>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="logo" href="index.html">
+                <img src="images/logo.png" alt="Diogo Shoes home" width="120" height="87">
+            </a>
+
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+            </button>
+
+            <nav id="site-nav" class="site-nav" aria-label="Main">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="learnmore.html">Learn More</a></li>
+                    <li><a href="products.html">Products</a></li>
+                </ul>
+            </nav>
+
+            <a class="cart-link" href="checkout.html" aria-label="Cart">
+                <svg class="cart-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
+                    <path d="M6 7h12l-1 13H7L6 7Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M9 7a3 3 0 0 1 6 0" fill="none" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                <span class="cart-count" data-cart-count hidden>0</span>
+            </a>
         </div>
+    </header>
+
+    <main id="main">
+        <div class="panel">
+            <h1>Checkout</h1>
+
+            <div class="checkout-layout">
+                <section class="order-summary" aria-labelledby="cart-heading">
+                    <h2 id="cart-heading" tabindex="-1">Your Cart</h2>
+
+                    <div id="cart-empty" class="cart-empty" hidden>
+                        <p>Your cart is empty.</p>
+                        <a class="button" href="products.html">Browse products</a>
+                    </div>
+
+                    <ul id="cart-items" class="cart-items"></ul>
+
+                    <form id="promo-form" class="promo-form" novalidate>
+                        <label for="promo">Promo code</label>
+                        <div class="inline-field">
+                            <input id="promo" name="promo" type="text" autocomplete="off" placeholder="Try STEPBOLD">
+                            <button class="button button-outline" type="submit">Apply</button>
+                        </div>
+                        <p id="promo-message" class="promo-message" role="status"></p>
+                    </form>
+
+                    <dl class="totals">
+                        <div><dt>Subtotal</dt><dd id="subtotal">$0.00</dd></div>
+                        <div id="discount-row" hidden><dt>Discount</dt><dd id="discount">$0.00</dd></div>
+                        <div><dt>Shipping</dt><dd id="shipping">Free</dd></div>
+                        <div class="totals-grand"><dt>Total</dt><dd id="total">$0.00</dd></div>
+                    </dl>
+                    <p id="shipping-note" class="shipping-note" aria-live="polite"></p>
+                </section>
+
+                <section class="payment" aria-labelledby="payment-heading">
+                    <h2 id="payment-heading">Payment</h2>
+                    <p class="demo-note">
+                        Demo store &mdash; no real payment is taken. Use test card <strong>4242 4242 4242 4242</strong>
+                        with any future date.
+                    </p>
+
+                    <form id="checkout-form" class="checkout-form" novalidate>
+                        <div class="field">
+                            <label for="email">Email</label>
+                            <input id="email" name="email" type="email" autocomplete="email" aria-describedby="email-error" required>
+                            <p id="email-error" class="field-error"></p>
+                        </div>
+
+                        <div class="field">
+                            <label for="name">Name on card</label>
+                            <input id="name" name="name" type="text" autocomplete="cc-name" aria-describedby="name-error" required>
+                            <p id="name-error" class="field-error"></p>
+                        </div>
+
+                        <div class="field">
+                            <label for="card">Card number <span id="card-brand" class="card-brand" aria-live="polite"></span></label>
+                            <input id="card" name="card" type="text" inputmode="numeric" autocomplete="cc-number"
+                                placeholder="1234 1234 1234 1234" maxlength="19" aria-describedby="card-error" required>
+                            <p id="card-error" class="field-error"></p>
+                        </div>
+
+                        <div class="field-row">
+                            <div class="field">
+                                <label for="expiry">Expiration</label>
+                                <input id="expiry" name="expiry" type="text" inputmode="numeric" autocomplete="cc-exp"
+                                    placeholder="MM/YY" maxlength="5" aria-describedby="expiry-error" required>
+                                <p id="expiry-error" class="field-error"></p>
+                            </div>
+                            <div class="field">
+                                <label for="cvc">CVC</label>
+                                <input id="cvc" name="cvc" type="text" inputmode="numeric" autocomplete="cc-csc"
+                                    placeholder="123" maxlength="3" aria-describedby="cvc-error" required>
+                                <p id="cvc-error" class="field-error"></p>
+                            </div>
+                            <div class="field">
+                                <label for="zip">ZIP</label>
+                                <input id="zip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code"
+                                    placeholder="12345" maxlength="10" aria-describedby="zip-error" required>
+                                <p id="zip-error" class="field-error"></p>
+                            </div>
+                        </div>
+
+                        <p id="form-error" class="form-error" role="alert"></p>
+                        <button class="button button-block" type="submit">Purchase</button>
+                    </form>
+                </section>
+            </div>
+        </div>
+
+        <template id="cart-item-template">
+            <li class="cart-item">
+                <img src="" alt="" width="80" height="80">
+                <div class="cart-item-info">
+                    <p class="cart-item-name"></p>
+                    <p class="cart-item-size"></p>
+                    <div class="qty" role="group" aria-label="Quantity">
+                        <button class="qty-button" type="button" data-action="decrease">&minus;</button>
+                        <span class="qty-value" aria-live="polite"></span>
+                        <button class="qty-button" type="button" data-action="increase">+</button>
+                    </div>
+                </div>
+                <div class="cart-item-end">
+                    <p class="cart-item-price"></p>
+                    <button class="remove-button" type="button" data-action="remove">Remove</button>
+                </div>
+            </li>
+        </template>
     </main>
 
-    <div class = "footer"> 
-    <footer>
-       <!--<div class = "flag">
-            <img src="images/US.png" alt="US flag logo" width= 25px>
-        </div>--> 
-        <ul>
-            <li><img src="images/US.png" alt="US flag logo" width= 25px></li>
-            <li>US/EN</li>
-            <li>Terms of Use</li>
-            <li>Terms of Sale</li>
-            <li>Privacy Policy</li>
-            <li>Do Not Sell or Share My Personal Information</li>
-            <li><span class="copywrite">©2024 Diogo Shoes</span></li>
-        </ul>      
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <p class="locale"><img src="images/US.png" alt="" width="20" height="18"> US/EN</p>
+            <ul class="footer-links">
+                <li>Terms of Use</li>
+                <li>Terms of Sale</li>
+                <li>Privacy Policy</li>
+                <li>Do Not Sell or Share My Personal Information</li>
+            </ul>
+            <p class="copyright">&copy; <span data-year>2024</span> Diogo Shoes</p>
+        </div>
     </footer>
-    </div>
-</div>
 </body>
+
 </html>

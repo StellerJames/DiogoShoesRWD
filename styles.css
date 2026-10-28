@@ -1,335 +1,1058 @@
-body {
-    color: #10120D;
-    font-family: sans-serif;
-    background-image: url("images/background.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    font-size: clamp(1rem, 2rem + -0.083vw, 1.5rem);
-    margin: 0;
-    padding: 0;
+/* Diogo Shoes
+   Mobile-first stylesheet: Base styles target small screens
+   Media queries add layout as space grows. */
+
+@font-face {
+    font-family: Raleway;
+    src: url("fonts/Raleway-VariableFont_wght.ttf") format("truetype");
+    font-weight: 100 900;
+
+    /* Show a fallback font right away, then swap in this one once it loads. */
+
+    font-display: swap;
 }
 
-/*h1 {
-    padding: 0;
-    margin-top: 1em;
-    text-align: center;
-    color: #3b452b;
-    text-shadow: rgb(21, 20, 13) 1px 0 1px;
+@font-face {
     font-family: Bitter;
-    font-size: clamp(1.5rem, 0.955rem + 2.73vw, 3rem);
+    src: url("fonts/Bitter-VariableFont_wght.ttf") format("truetype");
+    font-weight: 100 900;
+    font-display: swap;
+}
+
+/* CSS variables: define a value once here and reuse it with var(--name).
+   Changing a color here updates it everywhere. */
+
+:root {
+    --color-forest: #282d20;
+    --color-forest-dark: #10120d;
+    --color-gold: #d4a546;
+    --color-gold-light: #f4c95d;
+    --color-light: #eaeaea;
+    --color-surface: #ffffff;
+    --color-muted: #5b6152;
+    --color-border: #d6d8d1;
+    --color-error: #b3261e;
+    --color-success: #2e6b30;
+
+    --font-body: Raleway, system-ui, sans-serif;
+    --font-heading: Bitter, Georgia, serif;
+
+    --radius: 0.75rem;
+    --shadow: 0 0.5rem 1.5rem rgb(16 18 13 / 0.25);
+
+    /* clamp(min, preferred, max): grows with the screen width (vw) but stays between min and max. */
+
+    --gutter: clamp(1rem, 4vw, 2rem);
+    --header-height: 4.5rem;
+}
+
+/* Base */
+
+/* border-box makes width include padding and border, so sizes are easier to predict. */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* When jumping to a link like #main, leave room so the sticky header doesn't cover it. */
+
+html {
+    scroll-padding-top: calc(var(--header-height) + 1rem);
+}
+
+/* A full-height column; main has flex: 1 so it stretches and keeps the footer at the bottom. */
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: var(--color-forest-dark);
+    font-family: var(--font-body);
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    line-height: 1.6;
+    background: var(--color-forest) url("images/background.jpg") center / cover fixed;
 }
 
 main {
-    background-color: white;
-    width: 800px;
-    height: auto;
-    margin:5em auto;
-    /*TRBL*/
-   /* padding: 1em;
-    border-radius: 1em;
-    box-shadow: black 2px 2px 1px;
-    border: 1px double #291c20;
-}
-
-div {
-    padding: .5em;
-    text-align: left;
-    line-height: 1.5;
-    font-family: Raleway;
-}
-
-.bold {
-    font-weight: bold;
-}
-
-.center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-*/
-header img {
-    width: 100px;
-    display: flex-end;
-    margin-left: 40px;
-}
-/*
-header {
-    background-color: #282D20;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    box-shadow: 0 0 30px 0 #10120D;
-}
-
-header * {
-    display: inline;
-}
-
-header li {
-    margin: 20px;
-}
-
-header li a {
-    color: #D4A546;
-    text-decoration: none;
-    font-family: Raleway;
-    font-size: 1.5rem;
-}
-
-footer img {
-    width: 15px;
-    margin-left: 40px;
-}
-
-footer {
-    color: #EAEAEA;
-    background-color: #282D20;
-    position: relative;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 70px;
-    display: flex;
-    align-items: baseline;
-}
-
-footer * {
-    display: inline;
-}
-
-footer a {
-    color: #EAEAEA;
-    margin: auto;
-    padding-left: 5em;
-    font-family: Raleway;
-    font-size: .5rem;
-    text-decoration: solid;
-    align-content: center;
-    gap: 30px;
-}
-
-.checkout {
-    text-align: left;    
-}
-
-p {
-    text-indent: 50px;
-    padding: .5em;
-    text-align: center;
-    line-height: 1.5;
-    font-family: Raleway;
-    max-width: 70ch;
-}*/
-
-.copywrite {
-    text-align: right;
-}
-
-@font-face {
-    font-family: Bitter;
-    src: url(fonts/Bitter-VariableFont_wght.ttf);
-}
-
-@font-face {
-    font-family: Raleway;
-    src: url(fonts/Raleway-VariableFont_wght.ttf);
-}
-/*
-.navigation {  
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    min-width: 1200px;
-}*/
-
-.cvc {
-    width: 30px;
-}
-/*
-.content{  
-    padding: 0 50px;
-    max-width: 960px;
+    flex: 1;
+    width: 100%;
+    max-width: 72rem;
     margin: 0 auto;
+    padding: 2rem var(--gutter) 3rem;
 }
 
 img {
     max-width: 100%;
     height: auto;
-}*/
-
-.grid-container {
-    display: grid;
-    grid-template-areas:
-    'header'
-    'navigation'
-    'content'
-    'footer';
-    gap: 10x;
+    display: block;
 }
 
-.header {
-    grid-area: header;
-    background-color: #282D20;
-    position: fixed;
+h1,
+h2,
+h3 {
+    font-family: var(--font-heading);
+    line-height: 1.2;
+    color: var(--color-forest);
+}
+
+h1 {
+    margin: 0 0 1.5rem;
+    text-align: center;
+    font-size: clamp(1.75rem, 1.3rem + 2.2vw, 3rem);
+}
+
+h2 {
+    font-size: clamp(1.35rem, 1.1rem + 1vw, 1.9rem);
+}
+
+a {
+    color: inherit;
+}
+
+/* Outline for keyboard users (Tab key); it doesn't appear on mouse clicks. */
+
+:focus-visible {
+    outline: 3px solid var(--color-gold);
+    outline-offset: 2px;
+}
+
+/* Make sure the hidden attribute always wins, even over rules that set display. */
+
+[hidden] {
+    display: none !important;
+}
+
+/* Sits off-screen until a keyboard user tabs to it, then slides into view.
+   It lets them jump past the menu straight to the page content. */
+
+.skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -4rem;
+    z-index: 100;
+    padding: 0.5rem 1rem;
+    background: var(--color-gold);
+    color: var(--color-forest-dark);
+    font-weight: 700;
+    border-radius: var(--radius);
+}
+
+.skip-link:focus {
+    top: 1rem;
+}
+
+.center-text {
+    text-align: center;
+}
+
+/* Buttons & form controls */
+
+.button {
+    display: inline-block;
+    padding: 0.7rem 1.4rem;
+    border: 2px solid var(--color-forest);
+    border-radius: 999px;
+    background: var(--color-forest);
+    color: var(--color-gold-light);
+    font: inherit;
+    font-weight: 700;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, transform 0.1s;
+}
+
+.button:hover {
+    background: var(--color-forest-dark);
+}
+
+.button:active {
+    transform: translateY(1px);
+}
+
+.button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.button-outline {
+    background: transparent;
+    color: var(--color-forest);
+}
+
+.button-outline:hover {
+    background: var(--color-forest);
+    color: var(--color-gold-light);
+}
+
+.button-block {
+    width: 100%;
+}
+
+.text-link {
+    font-weight: 700;
+    color: var(--color-forest);
+}
+
+label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    background: var(--color-surface);
+    font: inherit;
+    color: inherit;
+}
+
+input[aria-invalid="true"],
+select[aria-invalid="true"] {
+    border-color: var(--color-error);
+    box-shadow: 0 0 0 1px var(--color-error);
+}
+
+.field {
+    margin-bottom: 1rem;
+}
+
+.field-error,
+.form-error {
+    min-height: 1.25em;
+    margin: 0.25rem 0 0;
+    color: var(--color-error);
+    font-size: 0.85rem;
+}
+
+/* Take up no space when there's no error message. */
+
+.field-error:empty,
+.form-error:empty {
+    min-height: 0;
+}
+
+/* Header & navigation */
+
+/* sticky: scrolls normally until it reaches the top, then stays there. */
+
+.site-header {
+    position: sticky;
     top: 0;
-    left: 0;
-    right: 0;
-    height: 80px;
+    z-index: 50;
+    background: var(--color-forest);
+    box-shadow: 0 0 1.5rem var(--color-forest-dark);
+}
+
+.header-inner {
+    max-width: 72rem;
+    min-height: var(--header-height);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
     display: flex;
     align-items: center;
-    box-shadow: 0 0 30px 0 #10120D;
-}
-/*.logo {
-    width: 100px;
-    margin-left: 40px;
-}*/
-.navigation {
-    grid-area: navigation;
+    gap: 1rem;
 }
 
-.navigation ul {
-    list-style: none;
-    margin: 5em, 0, 5em, 0;
-   
+/* margin-right: auto takes up all the spare space, pushing everything else to the right. */
 
+.logo {
+    margin-right: auto;
+}
+
+/* The logo PNG has a lot of empty space below the lettering; crop it. */
+
+.logo img {
+    width: 6.5rem;
+    height: 3.25rem;
+    object-fit: cover;
+    object-position: center 20%;
+}
+
+/* order changes where an item sits in a flex row without moving it in the HTML. */
+
+.nav-toggle {
+    order: 3;
+    width: 2.75rem;
+    height: 2.75rem;
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 10px;
-    justify-items: center;       
+    place-items: center;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
 }
 
-.navigation li {
-    padding: 8px;    
-    font-family: Raleway;   
+/* The three menu lines: one real span plus ::before and ::after,
+   which are extra boxes CSS draws above and below it. */
+
+.nav-toggle-bar,
+.nav-toggle-bar::before,
+.nav-toggle-bar::after {
+    display: block;
+    width: 1.5rem;
+    height: 2px;
+    background: var(--color-gold);
+    transition: transform 0.25s, opacity 0.25s;
+}
+
+.nav-toggle-bar {
+    position: relative;
+}
+
+.nav-toggle-bar::before,
+.nav-toggle-bar::after {
+    content: "";
+    position: absolute;
+    left: 0;
+}
+
+.nav-toggle-bar::before {
+    top: -7px;
+}
+
+.nav-toggle-bar::after {
+    top: 7px;
+}
+
+/* When the menu is open: hide the middle line and rotate the other two into an X. */
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar {
+    background: transparent;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar::before {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar::after {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Mobile: the menu drops down below the header bar. Without JS it stays visible. */
+
+.site-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-forest);
+    box-shadow: 0 1rem 1.5rem rgb(16 18 13 / 0.4);
+}
+
+/* main.js adds the "js" class to <html>, so the menu is only hidden
+   when JavaScript is running and the button can open it. */
+
+.js .site-nav {
+    display: none;
+}
+
+.js .site-nav.is-open {
+    display: block;
+}
+
+.site-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem var(--gutter) 1rem;
+}
+
+.site-nav a {
+    display: block;
+    padding: 0.75rem 0.5rem;
+    color: var(--color-gold);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.site-nav a:hover {
+    color: var(--color-gold-light);
+}
+
+.site-nav a[aria-current="page"] {
+    color: var(--color-light);
+    border-bottom-color: var(--color-gold);
+}
+
+.cart-link {
+    order: 2;
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    color: var(--color-gold);
+    border-radius: 50%;
+}
+
+.cart-link:hover,
+.cart-link[aria-current="page"] {
+    color: var(--color-light);
+}
+
+/* position: absolute places the badge relative to .cart-link (which is position: relative). */
+
+.cart-count {
+    position: absolute;
+    top: 0;
+    right: -0.15rem;
+    min-width: 1.25rem;
+    height: 1.25rem;
+    padding: 0 0.3rem;
+    border-radius: 999px;
+    background: var(--color-gold);
+    color: var(--color-forest-dark);
+    font-size: 0.75rem;
+    font-weight: 800;
+    line-height: 1.25rem;
+    text-align: center;
+}
+
+/* Content panels */
+
+.panel {
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: clamp(1.25rem, 4vw, 2.5rem);
+    margin-bottom: 2rem;
+}
+
+.prose {
+    max-width: 48rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ch is the width of one character, so lines stay a comfortable reading length. */
+
+.prose p {
+    max-width: 65ch;
+    margin: 0 auto 1.5rem;
+}
+
+/* Scale photos down to fit rather than cropping, so the shoes stay in frame. */
+
+.prose img {
+    width: auto;
+    max-height: 36rem;
+    margin: 0 auto 1rem;
+    border-radius: var(--radius);
+}
+
+/* "A + B" targets a B directly after an A, so every section except the first gets a divider. */
+
+.feature + .feature {
+    margin-top: 2.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.feature h2 {
+    text-align: center;
+}
+
+/* Scroll-in animation; only hidden when JS is running to reveal it again. */
+
+.js .reveal {
+    opacity: 0;
+    transform: translateY(1.5rem);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.js .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+}
+
+/* Home */
+
+.hero {
+    margin-bottom: 2rem;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.hero img {
+    width: 100%;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0 1rem 1.5rem;
+
+    /* Same translucent green as the banner PNG so they read as one block. */
+
+    background: rgb(33 37 25 / 0.67);
+}
+
+.hero .button-outline {
+    border-color: var(--color-light);
+    color: var(--color-light);
+}
+
+.hero .button-outline:hover {
+    background: var(--color-light);
+    color: var(--color-forest);
+}
+
+/* Product catalog */
+
+.catalog-toolbar {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.chip {
+    padding: 0.45rem 1.1rem;
+    border: 2px solid var(--color-forest);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-forest);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.chip[aria-pressed="true"] {
+    background: var(--color-forest);
+    color: var(--color-gold-light);
+}
+
+.toolbar-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.toolbar-fields .field {
+    margin: 0;
+}
+
+.results-status {
+    margin: 0 0 1rem;
+    color: var(--color-muted);
+    font-size: 0.95rem;
+}
+
+/* Fits as many columns as possible, each at least 15rem wide, sharing extra space (1fr).
+   This makes the grid responsive without media queries. */
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+}
+
+/* Every photo gets the same 3:4 shape. object-fit: cover fills it by cropping
+   the edges instead of stretching the image. */
+
+.product-image {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    background: var(--color-light);
+}
+
+/* Wide studio shots are shown whole; the fill matches their white-to-gray backdrop. */
+
+.product-image-contain {
+    object-fit: contain;
+    background: linear-gradient(#fdfdfd, #f5f5f5 45%, #ececee);
+}
+
+.product-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 1rem;
+}
+
+.product-category {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.product-name {
+    margin: 0.25rem 0;
+    font-size: 1.25rem;
+}
+
+.product-price {
+    margin: 0 0 0.75rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+/* Pushes the button to the bottom so buttons line up across cards. */
+
+.add-to-cart {
+    margin-top: auto;
+}
+
+.product-body .field-error {
+    margin-bottom: 0.5rem;
+}
+
+/* Checkout */
+
+.checkout-layout {
+    display: grid;
+    gap: 2rem;
+}
+
+.checkout-layout h2 {
+    margin-top: 0;
+}
+
+.cart-items {
+    list-style: none;
+    margin: 0 0 1.5rem;
+    padding: 0;
+}
+
+/* Three columns: fixed-width photo, details taking the remaining space, price as wide as needed. */
+
+.cart-item {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr auto;
+    gap: 0.75rem;
+    align-items: start;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.cart-item img {
+    width: 4.5rem;
+    height: 4.5rem;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+
+.cart-item p {
+    margin: 0;
+}
+
+.cart-item-name {
+    font-weight: 700;
+}
+
+.cart-item-size {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+}
+
+.cart-item-end {
+    text-align: right;
+}
+
+.cart-item-price {
+    font-weight: 700;
+}
+
+.qty {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 0.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+}
+
+.qty-button {
+    width: 2rem;
+    height: 2rem;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.qty-button:hover:not(:disabled) {
+    background: var(--color-light);
+}
+
+.qty-button:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.qty-value {
+    min-width: 1.75rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+.remove-button {
+    margin-top: 0.5rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--color-muted);
+    font: inherit;
+    font-size: 0.85rem;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.remove-button:hover {
+    color: var(--color-error);
+}
+
+.cart-empty {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    background: var(--color-light);
+    border-radius: var(--radius);
+}
+
+.cart-empty p {
+    margin-top: 0;
+}
+
+.inline-field {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.inline-field .button {
+    padding-block: 0.5rem;
+}
+
+.promo-message {
+    margin: 0.25rem 0 0;
+    font-size: 0.9rem;
+}
+
+.promo-message.is-success {
+    color: var(--color-success);
+}
+
+.promo-message.is-error {
+    color: var(--color-error);
+}
+
+.totals {
+    margin: 1.5rem 0 0;
+}
+
+.totals div {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.35rem 0;
+}
+
+/* tabular-nums gives every digit the same width so prices line up. */
+
+.totals dd {
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+}
+
+.totals-grand {
+    margin-top: 0.5rem;
+    border-top: 2px solid var(--color-forest);
+    font-weight: 800;
+    font-size: 1.2rem;
+}
+
+.shipping-note {
+    margin: 0.5rem 0 0;
+    color: var(--color-muted);
+    font-size: 0.9rem;
+}
+
+.demo-note {
+    padding: 0.75rem 1rem;
+    border-left: 4px solid var(--color-gold);
+    background: #fbf5e6;
+    font-size: 0.9rem;
+}
+
+.card-brand {
+    float: right;
+    color: var(--color-muted);
+    font-weight: 700;
+}
+
+.field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 0.75rem;
+}
+
+/* 1 / -1 means "from the first grid line to the last", so ZIP spans the full row on phones. */
+
+.field-row .field:last-child {
+    grid-column: 1 / -1;
+}
+
+/* Confirmation  */
+
+.confirmation {
+    max-width: 40rem;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.confirmation .lead {
+    font-size: 1.25rem;
+    margin: 0 0 1rem;
+}
+
+.confirmation .arrow {
+    width: min(100%, 20rem);
+    margin: 0 auto 1.5rem;
+}
+
+.order-meta {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0 0 1.5rem;
+    padding: 1rem;
+    background: var(--color-light);
+    border-radius: var(--radius);
     text-align: left;
 }
 
-.navigation li a {
-    color: #D4A546;
+.order-meta dt {
+    color: var(--color-muted);
+    font-size: 0.85rem;
 }
 
-.navigation li:hover {
-    background-color:#282D20;
-    opacity: 0.2;
-}
-.content {
-    grid-area: main;
-    background-color: white;    
-    font-family: Raleway;
-    line-height: 1.5;
-    text-align: center;
-    max-width: 70ch;
-    margin:5em auto;
-    padding: 1em;
-    padding-top: 100px;
-    border-radius: 1em;
-    box-shadow: black 2px 2px 1px;
-    border: 1px double #291c20;
-    }
-
-.content h1 {
-    padding: .1rem;
-    text-align: center;
-    font-family: Raleway;
-    font-weight: bold;   
+.order-meta dd {
+    margin: 0;
+    font-weight: 700;
+    overflow-wrap: anywhere;
 }
 
-.footer {
-    grid-area:footer;
-    color: #EAEAEA;
-    background-color: #282D20;
-}
-/*.flag {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    justify-items: left;
-    max-width: 100%;
-    margin-top: 1em; 
-    padding-left: 1em;
-}*/
-.footer ul {
+.order-items {
     list-style: none;
-    margin-top: 1.5em;
-    padding-left: 4em;
-
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-    justify-items: center;
+    margin: 0;
+    padding: 0;
+    text-align: left;
 }
 
-.footer li {
-    display: grid;
-    grid-template-columns: repeat(3, 2fr);
-    justify-items: center;
-    color: #EAEAEA;
-    font-family: Raleway;
-    font-size: clamp(0.6944rem, 0.6513rem + 0.1919vw, 0.8rem);   
-    gap: 30px;
+.order-items li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--color-border);
 }
 
-@media (max-width: 600px) {
- 
-    .grid-container {
-        display: grid;
-        grid-template-areas:
-        'header'
-        'navigation'
-        'content'
-        'footer';
-        gap: 10x;
+.confirmation .totals {
+    text-align: left;
+}
+
+.share {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.share h2 {
+    margin-top: 0;
+}
+
+/* Toast */
+
+/* left: 50% plus translate(-50%) centers it horizontally. It starts invisible and a
+   little low; adding .is-visible fades it in and slides it up. */
+
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 1.5rem;
+    z-index: 60;
+    max-width: calc(100% - 2rem);
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--radius);
+    background: var(--color-forest-dark);
+    color: var(--color-light);
+    box-shadow: var(--shadow);
+    opacity: 0;
+    transform: translate(-50%, 1rem);
+    pointer-events: none;
+    transition: opacity 0.25s, transform 0.25s;
+}
+
+.toast.is-visible {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+/* Footer */
+
+.site-footer {
+    background: var(--color-forest);
+    color: var(--color-light);
+    font-size: 0.85rem;
+}
+
+.footer-inner {
+    max-width: 72rem;
+    margin: 0 auto;
+    padding: 1.5rem var(--gutter);
+    display: grid;
+    gap: 1rem;
+    text-align: center;
+}
+
+.footer-inner p {
+    margin: 0;
+}
+
+.locale {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.footer-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1.5rem;
+}
+
+/* Tablet and up */
+
+/* Mobile-first: everything above is for phones. These rules only apply
+   once the screen is at least 48rem (768px) wide. */
+
+@media (min-width: 48rem) {
+    .nav-toggle {
+        display: none;
     }
 
-    .header {
-        grid-area: header;
-        background-color: #282D20;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 100px;
+    .site-nav,
+    .js .site-nav {
+        position: static;
+        display: block;
+        background: none;
+        box-shadow: none;
+    }
+
+    .site-nav ul {
         display: flex;
+        gap: 0.5rem;
+        padding: 0;
+    }
+
+    .site-nav a {
+        padding: 0.5rem 0.75rem;
+        font-size: 1rem;
+    }
+
+    .catalog-toolbar {
+        grid-template-columns: auto 1fr;
+        align-items: end;
+    }
+
+    .toolbar-fields {
+        justify-self: end;
+        grid-template-columns: 14rem 12rem;
+    }
+
+    .field-row {
+        grid-template-columns: 2fr 1fr 1.5fr;
+    }
+
+    .field-row .field:last-child {
+        grid-column: auto;
+    }
+
+    .order-meta {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .footer-inner {
+        grid-template-columns: auto 1fr auto;
         align-items: center;
-        box-shadow: 0 0 30px 0 #10120D;
-    }
-
-    .navigation {
-        grid-area: navigation;
-    }
-
-    .navigation ul {
-        list-style: none;
-        margin: 5em, 0, 5em, 0;       
-    
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-        gap: 10px;             
-    }   
-  
-    .content {
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-        justify-items: center;
-       padding-top: 100px; 
-    }
-
-    .footer {
-        grid-area:footer;
-        color: #EAEAEA;
-        background-color: #282D20;
-    }
- 
-    .footer ul {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-        gap: 10px;
+        text-align: left;
     }
 }
 
+/* Desktop */
 
-/*https://www.w3schools.com/css/tryit.asp?filename=tryresponsive_styles*/
+@media (min-width: 64rem) {
+    .checkout-layout {
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+    }
+
+    /* Keeps the cart summary in view while scrolling through the payment form. */
+
+    .order-summary {
+        position: sticky;
+        top: calc(var(--header-height) + 1.5rem);
+        align-self: start;
+    }
+}
+
+/* Users with a preference for reduced motion.
+   Some people turn on "reduce motion" in their system settings because animation
+   can make them feel unwell; this turns the animations off for them. */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+
+    .js .reveal {
+        opacity: 1;
+        transform: none;
+    }
+}

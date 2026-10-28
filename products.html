@@ -4,54 +4,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products</title>
-    <link href="styles.css" rel="stylesheet" />
+    <meta name="description" content="Shop men's and women's shoes from Diogo Shoes.">
+    <title>Products | Diogo Shoes</title>
+    <link rel="icon" href="images/logo.png">
+    <link rel="stylesheet" href="styles.css">
+    <script src="js/products.js" defer></script>
+    <script src="js/cart.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/catalog.js" defer></script>
 </head>
 
 <body>
-    <div class = "grid-container">
-        <div class = "header">
-    <header>
-        <div class="navigation">                 
-        <ul>
-            <li><img src="images/logo.png" alt="Diogo Logo" width=100%></li>
-            <li><a href=index.html>Home</a> </li>
-            <li><a href=aboutus.html>About Us</a></li>
-            <li><a href=learnmore.html>Learn More</a></li>
-            <li><a href=products.html>Products</a></li>
-            <li><a href=checkout.html>Checkout</a></li>
-            <li><a href=confirmation.html>Confirmation</a></li>
-        </ul>     
-    </div>
-    </header>
-</div>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-<main>
-    <div class = "content">
-        <h1>Men's</h1>
-        <img src="images/mens.jpg" alt="Men's Shoes" width="100%" class="center">
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="logo" href="index.html">
+                <img src="images/logo.png" alt="Diogo Shoes home" width="120" height="87">
+            </a>
 
-        <h1>Women's</h1>
-        <img src="images/womens.jpg" alt="Women's Shoes" width="100%" class="center">
-    </div>
-</main>
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+            </button>
 
-    <div class = "footer"> 
-    <footer>
-        <div class = "flag">
-            <img src="images/US.png" alt="US flag logo" width= 25px>
+            <nav id="site-nav" class="site-nav" aria-label="Main">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="learnmore.html">Learn More</a></li>
+                    <li><a href="products.html">Products</a></li>
+                </ul>
+            </nav>
+
+            <a class="cart-link" href="checkout.html" aria-label="Cart">
+                <svg class="cart-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
+                    <path d="M6 7h12l-1 13H7L6 7Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M9 7a3 3 0 0 1 6 0" fill="none" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                <span class="cart-count" data-cart-count hidden>0</span>
+            </a>
         </div>
-        <ul>
-            <li>US/EN</li>
-            <li>Terms of Use</li>
-            <li>Terms of Sale</li>
-            <li>Privacy Policy</li>
-            <li>Do Not Sell or Share My Personal Information</li>
-            <li><span class="copywrite">©2024 Diogo Shoes</span></li>
-        </ul>
+    </header>
+
+    <main id="main">
+        <section class="panel" aria-labelledby="products-heading">
+            <h1 id="products-heading">Products</h1>
+
+            <div class="catalog-toolbar">
+                <div class="filter-group" role="group" aria-label="Filter by category">
+                    <button class="chip" type="button" data-filter="all" aria-pressed="true">All</button>
+                    <button class="chip" type="button" data-filter="men" aria-pressed="false">Men's</button>
+                    <button class="chip" type="button" data-filter="women" aria-pressed="false">Women's</button>
+                </div>
+
+                <div class="toolbar-fields">
+                    <div class="field">
+                        <label for="search">Search</label>
+                        <input id="search" type="search" placeholder="e.g. oxford" autocomplete="off">
+                    </div>
+                    <div class="field">
+                        <label for="sort">Sort by</label>
+                        <select id="sort">
+                            <option value="featured">Featured</option>
+                            <option value="price-asc">Price: low to high</option>
+                            <option value="price-desc">Price: high to low</option>
+                            <option value="name">Name</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <p id="results-status" class="results-status" role="status"></p>
+
+            <div class="product-grid" data-product-grid>
+                <noscript>
+                    <p>Turn on JavaScript to browse and shop our products.</p>
+                </noscript>
+            </div>
+        </section>
+
+        <template id="product-card-template">
+            <article class="product-card">
+                <img class="product-image" src="" alt="" width="400" height="500" loading="lazy">
+                <div class="product-body">
+                    <p class="product-category"></p>
+                    <h2 class="product-name"></h2>
+                    <p class="product-price"></p>
+                    <label class="product-size-label">Size</label>
+                    <select class="product-size">
+                        <option value="">Choose a size</option>
+                    </select>
+                    <p class="field-error" aria-live="polite"></p>
+                    <button class="button add-to-cart" type="button">Add to cart</button>
+                </div>
+            </article>
+        </template>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <p class="locale"><img src="images/US.png" alt="" width="20" height="18"> US/EN</p>
+            <ul class="footer-links">
+                <li>Terms of Use</li>
+                <li>Terms of Sale</li>
+                <li>Privacy Policy</li>
+                <li>Do Not Sell or Share My Personal Information</li>
+            </ul>
+            <p class="copyright">&copy; <span data-year>2024</span> Diogo Shoes</p>
+        </div>
     </footer>
-    </div>
-</div>
 </body>
 
 </html>

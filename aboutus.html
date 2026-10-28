@@ -4,60 +4,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diogo Shoes</title>
-    <link href="styles.css" rel="stylesheet" />
+    <meta name="description" content="The story behind Diogo Shoes.">
+    <title>About Us | Diogo Shoes</title>
+    <link rel="icon" href="images/logo.png">
+    <link rel="stylesheet" href="styles.css">
+    <script src="js/products.js" defer></script>
+    <script src="js/cart.js" defer></script>
+    <script src="js/main.js" defer></script>
 </head>
 
 <body>
-    <div class = "grid-container">
-        <div class = "header">
-    <header>
-        <div class="navigation">
-        <ul>
-            <li><img src="images/logo.png" alt="Diogo Logo" width="200"></li>
-            <li><a href=index.html>Home</a> </li>
-            <li><a href=aboutus.html>About Us</a></li>
-            <li><a href=learnmore.html>Learn More</a></li>
-            <li><a href=products.html>Products</a></li>
-            <li><a href=checkout.html>Checkout</a></li>
-            <li><a href=confirmation.html>Confirmation</a></li>
-        </ul>         
-    </div>
-    </header>
-</div>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-    <main>
-            <div class = "content">
-        <h1>About Us</h1>
-        <p>
-            At Diogo Shoes, we believe that style and comfort should walk hand in hand. Born from the vibrant energy of
-            urban life, our brand is dedicated to crafting footwear that embodies the spirit of the city. Each pair of
-            Diogo Shoes combines contemporary design with high-quality materials, ensuring you look and feel your best whether
-            you're navigating the streets or hitting the town. We’re passionate about creating shoes that not only elevate your
-            outfit but also support your every step. Join us in celebrating individuality and urban flair—step into your
-            city with Diogo Shoes.
-        </p>
-    
-        <img src="images/shoes-in-window.jpg" alt="Shoes in Window" width=100% class="center">
-    </div>
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="logo" href="index.html">
+                <img src="images/logo.png" alt="Diogo Shoes home" width="120" height="87">
+            </a>
+
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+                <span class="nav-toggle-bar" aria-hidden="true"></span>
+            </button>
+
+            <nav id="site-nav" class="site-nav" aria-label="Main">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="aboutus.html">About Us</a></li>
+                    <li><a href="learnmore.html">Learn More</a></li>
+                    <li><a href="products.html">Products</a></li>
+                </ul>
+            </nav>
+
+            <a class="cart-link" href="checkout.html" aria-label="Cart">
+                <svg class="cart-icon" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
+                    <path d="M6 7h12l-1 13H7L6 7Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M9 7a3 3 0 0 1 6 0" fill="none" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                <span class="cart-count" data-cart-count hidden>0</span>
+            </a>
+        </div>
+    </header>
+
+    <main id="main">
+        <article class="panel prose">
+            <h1>About Us</h1>
+            <p>
+                At Diogo Shoes, we believe that style and comfort should walk hand in hand. Born from the vibrant energy of
+                urban life, our brand is dedicated to crafting footwear that embodies the spirit of the city. Each pair of
+                Diogo Shoes combines contemporary design with high-quality materials, ensuring you look and feel your best
+                whether you're navigating the streets or hitting the town. We’re passionate about creating shoes that not
+                only elevate your outfit but also support your every step. Join us in celebrating individuality and urban
+                flair&mdash;step into your city with Diogo Shoes.
+            </p>
+            <img class="reveal" src="images/shoes-in-window.jpg" alt="Shoes on display in a shop window" width="1051" height="1400" loading="lazy">
+        </article>
     </main>
-   
-    <div class = "footer"> 
-    <footer>
-       <!--<div class = "flag">
-            <img src="images/US.png" alt="US flag logo" width= 25px>
-        </div>--> 
-        <ul>
-            <li><img src="images/US.png" alt="US flag logo" width= 25px></li>
-            <li>US/EN</li>
-            <li>Terms of Use</li>
-            <li>Terms of Sale</li>
-            <li>Privacy Policy</li>
-            <li>Do Not Sell or Share My Personal Information</li>
-            <li><span class="copywrite">©2024 Diogo Shoes</span></li>
-        </ul>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <p class="locale"><img src="images/US.png" alt="" width="20" height="18"> US/EN</p>
+            <ul class="footer-links">
+                <li>Terms of Use</li>
+                <li>Terms of Sale</li>
+                <li>Privacy Policy</li>
+                <li>Do Not Sell or Share My Personal Information</li>
+            </ul>
+            <p class="copyright">&copy; <span data-year>2024</span> Diogo Shoes</p>
+        </div>
     </footer>
-</div>
-</div>
 </body>
+
 </html>
