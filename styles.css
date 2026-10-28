@@ -1,12 +1,12 @@
 body {
     color: #10120D;
     font-family: sans-serif;
-    background-image: url("images/tropical-forest\ \(2\).jpg");
+    background-image: url("images/background.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    font-size: clamp(1rem, 2rem + -0.083vw, 1.5rem)
-    margin 0;
+    font-size: clamp(1rem, 2rem + -0.083vw, 1.5rem);
+    margin: 0;
     padding: 0;
 }
 
@@ -133,12 +133,12 @@ p {
 
 @font-face {
     font-family: Bitter;
-    src: url(fonts/Bitter/Bitter-VariableFont_wght.ttf);
+    src: url(fonts/Bitter-VariableFont_wght.ttf);
 }
 
 @font-face {
     font-family: Raleway;
-    src: url(fonts/Raleway/Raleway-VariableFont_wght.ttf);
+    src: url(fonts/Raleway-VariableFont_wght.ttf);
 }
 /*
 .navigation {  
